@@ -33,7 +33,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private usersService: UsersService
   ) {
-    this.socket = io("https://nameless-escarpment-33559.herokuapp.com");
+    this.socket = io("https://nodelatest-api.herokuapp.com/api");
   }
 
   ngOnInit() {
