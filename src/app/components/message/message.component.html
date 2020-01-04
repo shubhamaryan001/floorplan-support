@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row ">
+    <div class="col-4">
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-title">Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8 mt-2 text-center text-white ">
+      <div class="container-fluid p-1" style=" background-color:#f76357;">
+        <ul class="list-inline">
+          <li class="list-inline-item ">
+            <span class="">
+              {{receiver}}
+              <img class="rounded-circle ml-1" src={{photoUrl}} style="width:40px; background-color:white;" alt="">
+              <br>
+              <small class="badge badge-pill badge-success">Online</small>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <h3>Users</h3>
+      </div>
+    </div>
+    <div class="col-8 p-2">
+      <div class="card p-1" ngx-auto-scroll lock-y-offset="10" observe-attributes style="min-height:500px; max-height:500px; overflow-y:scroll;">
+        <div class="container-fluid p-0 " *ngFor="let message of messagesArray">
+          <div class="card float-left p-2 mb-3" style="width: auto; text-align:center; color:white; background-color:#f76357;" *ngIf="user._id !== receiverId && user._id !== message.senderId">
+            <small class="badge badge-pill badge-info">{{receiver}}</small>
+            <div>{{message.body}}</div>
+          </div>
+          <div class="card float-right p-2 mb-3" style="width: auto; text-align:center; color:white; background-color:#00cecb;" *ngIf="user._id === message.senderId">
+            <small class="badge badge-pill badge-info">You</small>
+            <div>{{message.body}}</div>
+          </div>
+        </div>
+        <div class="text-center" *ngIf="typing">
+          <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-6d0b072c3d3f.gif" style=" width:50%;" class="img-fluid" alt="...">
+          <br>
+          <small class="badge badge-pill badge-info">{{receiver}} Is Typing....</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 mt-1">
+          <form (ngSubmit)="SendMessage()">
+            <textarea class="form-control" name="message" [(ngModel)]="message" (keypress)="IsTyping()" onKeyPress="IsTyping()" rows="2" style="border-radius:50px !important;"></textarea>
+            <button class=" mt-2 btn-primary btn-lg btn-block" style="border-radius:30px !important; border-color:none;">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
